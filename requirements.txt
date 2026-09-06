@@ -2,10 +2,12 @@ streamlit
 langchain
 langchain_classic
 langchain-community
+langchain-text-splitters
 langchain_core
 langchain-google-genai
 python-dotenv
 openai
+pypdf
 wikipedia
 mypy-extensions
 numexpr
