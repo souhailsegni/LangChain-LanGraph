@@ -31,7 +31,7 @@ title_template = PromptTemplate(
 llm = ChatGoogleGenerativeAI(model="gemini-3.6-flash", temperature=0.9)
 
 # Set up the LLMChain using the classic module
-title_chain = LLMChain(llm=llm, prompt=title_template)
+title_chain = LLMChain(llm=llm, prompt=title_template, verbose=True)
 
 if topic:
     with st.spinner("Generating article..."):
