@@ -39,11 +39,26 @@ question = st.text_input("Ask a question about the document:")
 
 if question:
     with st.spinner("Generating answer..."):
+        # Initialize history if it doesn't exist
         if 'history' not in st.session_state:
             st.session_state.history = []
         
-        answer = chain.run({"question": question, "chat_history": []})
+        # 1. Format the history into a list of tuples for LangChain
+        formatted_history = [(msg["question"], msg["answer"]) for msg in st.session_state.history]
+        
+        # 2. Pass the formatted history to the chain
+        answer = chain.run({"question": question, "chat_history": formatted_history})
+        
+        # 3. Save the new interaction to Streamlit's state
         st.session_state.history.append({"question": question, "answer": answer})
         
+        # Display current answer
         st.subheader("Answer")
         st.write(answer)
+        
+        # Display full conversation history
+        st.divider()
+        st.write("### Conversation History")
+        for msg in st.session_state.history:
+            st.write(f"**You:** {msg['question']}")
+            st.write(f"**Assistant:** {msg['answer']}")
