@@ -97,7 +97,7 @@ if st.session_state.file_path:
             remaining = int(cooldown_until - now)
             st.warning(f"Please wait {remaining}s due to rate limiting before trying again.")
         else:
-            question = st.session_state.get("question_input", "").strip()
+            question = q_input.strip()
             if question:
                 with st.spinner("Generating answer..."):
                     # Format history and get answer
@@ -129,8 +129,6 @@ if st.session_state.file_path:
                         st.session_state.history.append({"question": question, "answer": answer})
                         # increment session counter
                         st.session_state['requests_made'] = st.session_state.get('requests_made', 0) + 1
-                        # clear the input
-                        st.session_state.question_input = ""
 
     # Render chat history in the right sidebar when toggled on
     if st.session_state.get('show_history', False):
