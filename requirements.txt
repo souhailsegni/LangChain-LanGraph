@@ -13,3 +13,7 @@ mypy-extensions
 numexpr
 chromadb
 tiktoken
+
+grandalf
+typing
+langgraph
